@@ -1,4 +1,4 @@
-# KEN1210 Practical Assignment 1 - Genetic Algorithms
+# Genetic Algorithms - KEN1210 Practical Assignment 1 
 
 ## About This Project
 
