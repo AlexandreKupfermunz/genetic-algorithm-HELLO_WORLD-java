@@ -41,7 +41,7 @@ Evolutionary Optimization
 Heuristic Search Methods
 Software Development
 
-#How It Works
+## How It Works
 
 The algorithm begins with a randomly generated population of candidate solutions. Each individual is evaluated according to its similarity to the target phrase "HELLO WORLD".
 
