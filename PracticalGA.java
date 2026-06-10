@@ -8,7 +8,6 @@ public class PracticalGA {
 
     static int popSize = 100;
     static double mutationRate = 0.05;
-    static double crossoverRate = 0.65;
     static final int MAX_GENERATIONS = 10000;
 
     public static void main(String[] args) {
@@ -116,21 +115,19 @@ public class PracticalGA {
     }
 
     static void crossover(Individual a, Individual b) {
-        if (Math.random() <= crossoverRate) {
-            int index = (int) (Math.random() * a.chromosome.length);
-            char[] c1 = a.getChromosome();
-            char[] c2 = b.getChromosome();
-            char[] temp = new char[a.getChromosome().length];
-            for(int i = 0; i < a.getChromosome().length; i++){
-                temp[i]=c2[i];
-            }
-            for (int i = index; i < a.getChromosome().length; i++) {
-                c2[i] = c1[i];
-            }
-            for (int i = index; i < a.getChromosome().length; i++) {
-                c1[i] = temp[i];
-            }
+        int index = (int) (Math.random() * a.chromosome.length);
+        char[] c1 = a.getChromosome();
+        char[] c2 = b.getChromosome();
+        char[] temp = new char[a.getChromosome().length];
+        for(int i = 0; i < a.getChromosome().length; i++){
+            temp[i]=c2[i];
         }
+        for (int i = index; i < a.getChromosome().length; i++) {
+            c2[i] = c1[i];
+        }
+        for (int i = index; i < a.getChromosome().length; i++) {
+            c1[i] = temp[i];
+        }           
     }
 
     static void mutation(Individual individual) {
@@ -153,7 +150,14 @@ public class PracticalGA {
             Individual child2 = parents[1].clone();
             crossover(child1, child2);
             mutation(child1);
-            newPopulation[i] = child1;;
+            mutation(child2);
+            child1.setFitness(fitnessScore(child1.getChromosome()));
+            child2.setFitness(fitnessScore(child2.getChromosome()));
+            if (child1.getFitness() <= child2.getFitness()) {
+                newPopulation[i] = child1;
+            } else {
+                newPopulation[i] = child2;
+            }
         }
         return newPopulation;
     }
